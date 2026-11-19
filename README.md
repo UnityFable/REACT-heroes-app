@@ -13,3 +13,6 @@ En esta clase se ahonda en las SPA (Single Page Application)
   - [Vercel](https://v0.app/)
   - [Lovable](https://lovable.dev/)
   - [Bolt](https://bolt.new/)
+- Tanstack Query
+- Caché
+- QueryParams

@@ -1,18 +1,21 @@
 import { Badge } from '@/components/ui/badge';
 import { Heart, Trophy, Users, Zap } from 'lucide-react';
+import { useHeroesSummary } from '../hooks/useHeroesSummary';
 import { HeroStatCard } from './HeroStatCard';
 
 export const HeroStats = () => {
+  const { data: summaryData } = useHeroesSummary();
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       <HeroStatCard title='Total de personajes' icon={<Users className="h-4 w-4 text-muted-foreground" />}>
-        <div className="text-2xl font-bold">16</div>
+        <div className="text-2xl font-bold">{summaryData?.totalHeroes ?? 0}</div>
         <div className="flex gap-1 mt-2">
           <Badge variant="secondary" className="text-xs">
-            12 Heroes
+            {summaryData?.heroCount ?? 0} Heroes
           </Badge>
           <Badge variant="destructive" className="text-xs">
-            2 Villanos
+            {summaryData?.villainCount ?? 0} Villanos
           </Badge>
         </div>
       </HeroStatCard>
@@ -23,13 +26,13 @@ export const HeroStats = () => {
       </HeroStatCard>
 
       <HeroStatCard title='Mas Fuerte' icon={<Zap className="h-4 w-4 text-muted-foreground" />}>
-        <div className="text-lg font-bold">Superman</div>
-        <p className="text-xs text-muted-foreground">Fuerza: 10/10</p>
+        <div className="text-lg font-bold">{summaryData?.strongestHero.alias ?? ''}</div>
+        <p className="text-xs text-muted-foreground">Fuerza: {summaryData?.strongestHero.strength ?? 0}/10</p>
       </HeroStatCard>
 
       <HeroStatCard title='Mas Inteligente' icon={<Trophy className="h-4 w-4 text-muted-foreground" />}>
-        <div className="text-lg font-bold">Batman</div>
-        <p className="text-xs text-muted-foreground">Inteligencia: 10/10</p>
+        <div className="text-lg font-bold">{summaryData?.smartestHero.alias ?? ''}</div>
+        <p className="text-xs text-muted-foreground">Inteligencia: {summaryData?.smartestHero.intelligence ?? 0}/10</p>
       </HeroStatCard>
     </div>
   )
